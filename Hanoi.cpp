@@ -9,9 +9,12 @@ int licznik=0;
 
 void czekaj ( float liczba_sekund )
 {
-clock_t a;
-a = clock () + liczba_sekund * CLOCKS_PER_SEC ;
-while (clock() < a) {}
+    clock_t a;
+    a = clock () + liczba_sekund * CLOCKS_PER_SEC ;
+    while (clock() < a) 
+    {
+        
+    }
 }
 
 void czyszczenie (int tab [][3], int n)
@@ -69,7 +72,7 @@ void wypisz (int tab [][3], int n)
 	cout<<endl<<endl<<endl<<"krok numer:"<<licznik<<endl;
 }
 
-int ostatnie_zajente (int tab [][3], int m, int j)
+int ostatnie_zajete (int tab [][3], int m, int j)
 {
 	for (int i=0;i<m;i++)
 	{
@@ -93,12 +96,12 @@ int pierwsze_wolne (int tab [][3], int m, int j)
 	return m;
 }
 
-void Nazwa_Bez_Sensu (int tab[][3], int n, int m, int a, int b, int c)
+void Hanoi (int tab[][3], int n, int m, int a, int b, int c)
 {
 	int x,y;
 	if(n==1)
 	{
-	x=ostatnie_zajente(tab,m,a);
+	x=ostatnie_zajete(tab,m,a);
 	y=pierwsze_wolne(tab,m,c);
 	tab[y][c]=tab[x][a];
 	tab[x][a]=0;
@@ -109,8 +112,8 @@ void Nazwa_Bez_Sensu (int tab[][3], int n, int m, int a, int b, int c)
 	}
 	else
 	{
-		Nazwa_Bez_Sensu (tab, n-1, m, a, c, b);
-		x=ostatnie_zajente(tab,m,a);
+		Hanoi (tab, n-1, m, a, c, b);
+		x=ostatnie_zajete(tab,m,a);
 		y=pierwsze_wolne(tab,m,c);
 		tab[y][c]=tab[x][a];
 		tab[x][a]=0;
@@ -118,7 +121,7 @@ void Nazwa_Bez_Sensu (int tab[][3], int n, int m, int a, int b, int c)
 		wypisz (tab, m);
 		cout<<a+1<<"("<<x+1<<")"<<"->"<<c+1<<"("<<y+1<<")"<<endl;
 		czekaj(1);
-		Nazwa_Bez_Sensu (tab, n-1, m, b, a, c);
+		Hanoi (tab, n-1, m, b, a, c);
 	}
 	
 }
@@ -135,6 +138,6 @@ int main ()
 	wpisanie (tab, m);
 	wypisz (tab, m);
 	czekaj(1);
-	Nazwa_Bez_Sensu (tab, n, m, 0, 1, 2);
+	Hanoi (tab, n, m, 0, 1, 2);
 	return 0;
 }
